@@ -30,7 +30,7 @@ static t_stack	*initialize(int count)
 
 static void	check_duplicates(t_stack *stacks, int count)
 {
-	int i;
+	int	i;
 
 	i = stacks->count_a;
 	while (--i > count)
