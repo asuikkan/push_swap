@@ -12,6 +12,20 @@
 
 #include "push_swap.h"
 
+void	error_handler(t_stack *stacks)
+{
+	if (stacks)
+	{
+		if (stacks->a)
+			free(stacks->a);
+		if (stacks->b)
+			free(stacks->b);
+		free(stacks);
+	}
+	write(2, "Error\n", 6);
+	exit(1);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc == 1)

@@ -12,20 +12,6 @@
 
 #include "push_swap.h"
 
-static void	error_handler(t_stack *stacks)
-{
-	if (stacks)
-	{
-		if (stacks->a)
-			free(stacks->a);
-		if (stacks->b)
-			free(stacks->b);
-		free(stacks);
-	}
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
 static t_stack	*initialize(int count)
 {
 	t_stack	*stacks;
@@ -40,6 +26,18 @@ static t_stack	*initialize(int count)
 	stacks->count_a = count;
 	stacks->count_b = 0;
 	return (stacks);
+}
+
+static void	check_duplicates(t_stack *stacks, int count)
+{
+	int i;
+
+	i = stacks->count_a;
+	while (--i > count)
+	{
+		if (stacks->a[count] == stacks->a[i])
+			error_handler(stacks);
+	}
 }
 
 static int	validate_arg(int *integer, char *arg)
@@ -81,5 +79,6 @@ void	create_stacks(int count, char **argv)
 		if (!validate_arg(&stacks->a[count], argv[i++]))
 			error_handler(stacks);
 		ft_printf("stack_a[%d] = %d\n", count, stacks->a[count]);
+		check_duplicates(stacks, count);
 	}
 }

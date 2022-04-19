@@ -25,6 +25,7 @@ typedef struct s_stack
 	int	count_b;
 }		t_stack;
 
+void	error_handler(t_stack *stacks);
 void	create_stacks(int argc, char **argv);
 
 #endif
