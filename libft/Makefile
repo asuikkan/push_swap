@@ -33,7 +33,7 @@ SRCS	=	ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c ft_isascii.c	\
 			ft_strjoin_free.c ft_strdup_free.c address.c ft_ftoa.c		\
 			ft_anyitoa.c ftoa_helper.c ft_count_digits.c handlers1.c	\
 			handlers2.c handlers3.c handlers4.c helpers.c				\
-			modifiers1.c print.c ft_printf.c
+			modifiers1.c print.c ft_printf.c get_next_line.c
 
 OBJ		=	$(SRCS:.c=.o)
 

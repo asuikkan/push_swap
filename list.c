@@ -1,38 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   list.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuikkan <asuikkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/15 16:01:13 by asuikkan          #+#    #+#             */
-/*   Updated: 2022/04/15 16:01:15 by asuikkan         ###   ########.fr       */
+/*   Created: 2022/04/20 15:08:53 by asuikkan          #+#    #+#             */
+/*   Updated: 2022/04/20 15:08:55 by asuikkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	error_handler(t_stack *stacks)
+t_instr	*new_instr(void (*func)(t_stack *))
 {
-	if (stacks)
-	{
-		if (stacks->a)
-			free(stacks->a);
-		if (stacks->b)
-			free(stacks->b);
-		free(stacks);
-	}
-	write(2, "Error\n", 6);
-	exit(1);
-}
+	t_instr	*new;
 
-int	main(int argc, char **argv)
-{
-	t_stack	*stacks;
-
-	if (argc == 1)
-		exit(1);
-	stacks = create_stacks(argc - 1, argv);
-	read_input(stacks);
-	return (0);
+	new = (t_instr *)malloc(sizeof(t_instr));
+	if (!new)
+		return (NULL);
+	new->func = func;
+	new->next = NULL;
+	return (new);
 }
