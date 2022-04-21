@@ -18,11 +18,11 @@ static t_stack	*initialize(int count)
 
 	stacks = (t_stack *)malloc(sizeof(t_stack));
 	if (stacks == NULL)
-		error_handler(stacks);
+		error_handler(stacks, NULL);
 	stacks->a = ft_memalloc(count);
 	stacks->b = ft_memalloc(count);
 	if (stacks->a == NULL || stacks->b == NULL)
-		error_handler(stacks);
+		error_handler(stacks, NULL);
 	stacks->top_a = count - 1;
 	stacks->top_b = -1;
 	return (stacks);
@@ -33,10 +33,11 @@ static void	check_duplicates(t_stack *stacks, int count)
 	int	i;
 
 	i = stacks->top_a;
-	while (--i > count)
+	while (i > count)
 	{
 		if (stacks->a[count] == stacks->a[i])
-			error_handler(stacks);
+			error_handler(stacks, NULL);
+		i--;
 	}
 }
 
@@ -77,8 +78,7 @@ t_stack	*create_stacks(int count, char **argv)
 	while (--count >= 0)
 	{
 		if (!validate_arg(&stacks->a[count], argv[i++]))
-			error_handler(stacks);
-		ft_printf("stack_a[%d] = %d\n", count, stacks->a[count]);
+			error_handler(stacks, NULL);
 		check_duplicates(stacks, count);
 	}
 	return (stacks);

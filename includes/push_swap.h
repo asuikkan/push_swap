@@ -32,14 +32,16 @@ typedef struct s_instr
 }					t_instr;
 
 
-void	error_handler(t_stack *stacks);
+void	error_handler(t_stack *stacks, t_instr *cmds);
 void	swap_a(t_stack *stacks);
 void	swap_b(t_stack *stacks);
 void	swap_a_and_b(t_stack *stacks);
 void	push_a(t_stack *stacks);
 void	push_b(t_stack *stacks);
 void	push_a_and_b(t_stack *stacks);
+void	execute_cmds(t_stack *stacks, t_instr *cmds);
 t_stack	*create_stacks(int argc, char **argv);
+t_instr	*read_input(t_stack *stacks);
 t_instr	*new_instr(void (*func)(t_stack *));
 
 #endif

@@ -12,8 +12,22 @@
 
 #include "push_swap.h"
 
-void	error_handler(t_stack *stacks)
+static void	free_list(t_instr *cmds)
 {
+	t_instr	*temp;
+
+	while (cmds)
+	{
+		temp = cmds->next;
+		free(cmds);
+		cmds = temp;
+	}
+}
+
+void	error_handler(t_stack *stacks, t_instr *cmds)
+{
+	if (cmds)
+		free_list(cmds);
 	if (stacks)
 	{
 		if (stacks->a)
@@ -29,10 +43,12 @@ void	error_handler(t_stack *stacks)
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
+	t_instr	*cmds;
 
 	if (argc == 1)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
-	read_input(stacks);
+	cmds = read_input(stacks);
+	execute_cmds(stacks, cmds);
 	return (0);
 }

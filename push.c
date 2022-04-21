@@ -26,7 +26,7 @@ void	push_b(t_stack *stacks)
 	if (stacks->top_a < 0)
 		return ;
 	stacks->top_b++;
-	stacks->a[stacks->top_b] = stacks->b[stacks->top_a];
+	stacks->b[stacks->top_b] = stacks->a[stacks->top_a];
 	stacks->top_a--;
 }
 
