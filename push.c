@@ -14,20 +14,20 @@
 
 void	push_a(t_stack *stacks)
 {
-	if (stacks->top_b < 0)
+	if (stacks->size_b == 0)
 		return ;
-	stacks->top_a++;
-	stacks->a[stacks->top_a] = stacks->b[stacks->top_b];
-	stacks->top_b--;
+	stacks->size_b--;
+	stacks->a[stacks->size_a] = stacks->b[stacks->size_b];
+	stacks->size_a++;
 }
 
 void	push_b(t_stack *stacks)
 {
-	if (stacks->top_a < 0)
+	if (stacks->size_a == 0)
 		return ;
-	stacks->top_b++;
-	stacks->b[stacks->top_b] = stacks->a[stacks->top_a];
-	stacks->top_a--;
+	stacks->size_a--;
+	stacks->b[stacks->size_b] = stacks->a[stacks->size_a];
+	stacks->size_b++;
 }
 
 void	push_a_and_b(t_stack *stacks)

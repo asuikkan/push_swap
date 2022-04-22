@@ -16,6 +16,8 @@ t_instr	*new_instr(void (*func)(t_stack *))
 {
 	t_instr	*new;
 
+	if (!func)
+		return (NULL);
 	new = (t_instr *)malloc(sizeof(t_instr));
 	if (!new)
 		return (NULL);

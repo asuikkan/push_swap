@@ -19,12 +19,12 @@ static t_stack	*initialize(int count)
 	stacks = (t_stack *)malloc(sizeof(t_stack));
 	if (stacks == NULL)
 		error_handler(stacks, NULL);
-	stacks->a = ft_memalloc(count);
-	stacks->b = ft_memalloc(count);
+	stacks->a = ft_memalloc(sizeof(int) * count);
+	stacks->b = ft_memalloc(sizeof(int) * count);
 	if (stacks->a == NULL || stacks->b == NULL)
 		error_handler(stacks, NULL);
-	stacks->top_a = count - 1;
-	stacks->top_b = -1;
+	stacks->size_a = count;
+	stacks->size_b = 0;
 	return (stacks);
 }
 
@@ -32,7 +32,7 @@ static void	check_duplicates(t_stack *stacks, int count)
 {
 	int	i;
 
-	i = stacks->top_a;
+	i = stacks->size_a - 1;
 	while (i > count)
 	{
 		if (stacks->a[count] == stacks->a[i])

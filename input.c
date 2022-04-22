@@ -12,31 +12,6 @@
 
 #include "push_swap.h"
 
-static void	(*check_push(char *line))(t_stack *)
-{
-	if (ft_strlen(line) != 1)
-		return (NULL);
-	if (*line == 'a')
-		return (&push_a);
-	if (*line == 'b')
-		return (&push_b);
-	return (NULL);
-	
-}
-
-static void	(*check_swap(char *line))(t_stack *)
-{
-	if (ft_strlen(line) != 1)
-		return (NULL);
-	if (*line == 'a')
-		return (&swap_a);
-	if (*line == 'b')
-		return (&swap_b);
-	if (*line == 's')
-		return (&swap_a_and_b);
-	return (NULL);
-}
-
 static void	add_node(t_instr *head, t_instr *new)
 {
 	t_instr	*temp;
@@ -47,7 +22,7 @@ static void	add_node(t_instr *head, t_instr *new)
 	temp->next = new;
 }
 
-static void (*check_instruction(char *line))(t_stack *)
+static void	(*check_instruction(char *line))(t_stack *stacks)
 {
 	char	*temp;
 
@@ -56,6 +31,8 @@ static void (*check_instruction(char *line))(t_stack *)
 		return (check_swap(++temp));
 	if (*temp == 'p')
 		return (check_push(++temp));
+	if (*temp == 'r')
+		return (check_rotate(++temp));
 	return (NULL);
 }
 
@@ -64,7 +41,7 @@ t_instr	*read_input(t_stack *stacks)
 	t_instr	*head;
 	t_instr	*instr;
 	void	(*func)(t_stack *);
-;	char	*line;
+	char	*line;
 	int		ret;
 
 	head = NULL;
@@ -76,8 +53,6 @@ t_instr	*read_input(t_stack *stacks)
 		if (ret == 0)
 			break ;
 		func = check_instruction(line);
-		if (!func)
-			error_handler(stacks, head);
 		instr = new_instr(func);
 		if (!instr)
 			error_handler(stacks, head);
