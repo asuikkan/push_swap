@@ -1,45 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   reverse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuikkan <asuikkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/20 13:54:08 by asuikkan          #+#    #+#             */
-/*   Updated: 2022/04/20 13:54:10 by asuikkan         ###   ########.fr       */
+/*   Created: 2022/04/22 12:04:20 by asuikkan          #+#    #+#             */
+/*   Updated: 2022/04/22 12:04:21 by asuikkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "checker.h"
 
-void	swap_a(t_stack *stacks)
+void	reverse_a(t_stack *stacks)
 {
-	int	temp;
 	int	i;
+	int	temp;
 
 	if (stacks->size_a < 2)
 		return ;
-	i = stacks->size_a - 1;
-	temp = stacks->a[i - 1];
-	stacks->a[i - 1] = stacks->a[i];
-	stacks->a[i] = temp;
+	i = 0;
+	temp = stacks->a[i];
+	while (++i <= stacks->size_a - 1)
+		stacks->a[i - 1] = stacks->a[i];
+	stacks->a[stacks->size_a - 1] = temp;
 }
 
-void	swap_b(t_stack *stacks)
+void	reverse_b(t_stack *stacks)
 {
-	int	temp;
 	int	i;
+	int	temp;
 
 	if (stacks->size_b < 2)
 		return ;
-	i = stacks->size_b - 1;
-	temp = stacks->b[i - 1];
-	stacks->b[i - 1] = stacks->b[i];
-	stacks->b[i] = temp;
+	i = 0;
+	temp = stacks->b[i];
+	while (++i <= stacks->size_b - 1)
+		stacks->b[i - 1] = stacks->b[i];
+	stacks->b[stacks->size_b - 1] = temp;
 }
 
-void	swap_a_and_b(t_stack *stacks)
+void	reverse_a_and_b(t_stack *stacks)
 {
-	swap_a(stacks);
-	swap_b(stacks);
+	reverse_a(stacks);
+	reverse_b(stacks);
 }
