@@ -26,6 +26,18 @@ typedef struct s_stack
 }		t_stack;
 
 void	error_handler(t_stack *stacks);
+void	sort_stack(t_stack *stacks);
+void	push_a(t_stack *stacks);
+void	push_b(t_stack *stacks);
+void	swap_a(t_stack *stacks);
+void	swap_b(t_stack *stacks);
+void	swap_a_and_b(t_stack *stacks);
+void	rotate_a(t_stack *stacks);
+void	rotate_b(t_stack *stacks);
+void	rotate_a_and_b(t_stack *stacks);
+void	reverse_a(t_stack *stacks);
+void	reverse_b(t_stack *stacks);
+void	reverse_a_and_b(t_stack *stacks);
 t_stack	*create_stacks(int count, char **argv);
 
 #endif

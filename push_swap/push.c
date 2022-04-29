@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuikkan <asuikkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 15:05:32 by asuikkan          #+#    #+#             */
-/*   Updated: 2022/04/26 15:05:34 by asuikkan         ###   ########.fr       */
+/*   Created: 2022/04/20 14:02:57 by asuikkan          #+#    #+#             */
+/*   Updated: 2022/04/20 14:03:04 by asuikkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	free_stacks(t_stack *stacks)
+void	push_a(t_stack *stacks)
 {
-	free(stacks->a);
-	free(stacks->b);
-	free(stacks);
+	if (stacks->size_b == 0)
+		return ;
+	stacks->size_b--;
+	stacks->a[stacks->size_a] = stacks->b[stacks->size_b];
+	stacks->size_a++;
 }
 
-void	error_handler(t_stack *stacks)
+void	push_b(t_stack *stacks)
 {
-	if (stacks)
-		free_stacks(stacks);
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack	*stacks;
-
-	if (argc == 1)
-		exit(1);
-	stacks = create_stacks(argc - 1, argv);
-	sort_stack(stacks);
-	return (0);
+	if (stacks->size_a == 0)
+		return ;
+	stacks->size_a--;
+	stacks->b[stacks->size_b] = stacks->a[stacks->size_a];
+	stacks->size_b++;
 }

@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: asuikkan <asuikkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/26 15:05:32 by asuikkan          #+#    #+#             */
-/*   Updated: 2022/04/26 15:05:34 by asuikkan         ###   ########.fr       */
+/*   Created: 2022/04/28 14:24:30 by asuikkan          #+#    #+#             */
+/*   Updated: 2022/04/28 14:24:31 by asuikkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	free_stacks(t_stack *stacks)
+void	sort_stack(t_stack *stacks)
 {
-	free(stacks->a);
-	free(stacks->b);
-	free(stacks);
-}
+	int	i;
+	int	bottom;
 
-void	error_handler(t_stack *stacks)
-{
-	if (stacks)
-		free_stacks(stacks);
-	write(2, "Error\n", 6);
-	exit(1);
-}
-
-int	main(int argc, char **argv)
-{
-	t_stack	*stacks;
-
-	if (argc == 1)
-		exit(1);
-	stacks = create_stacks(argc - 1, argv);
-	sort_stack(stacks);
-	return (0);
+	i = stacks->size_a;
+	bottom = 0;
+	while (--i > 0)
+	{
+		if (stacks->a[i] > stacks->a[i - 1])
+		{
+			if (i - bottom > stacks->size_a / 2)
+			{
+				while (i > 0 && stacks->a[i] > stacks->a[i - 1])
+				{
+					write(1, "ra\n", 3);
+					i--;
+				}
+			}
+		}
+	}
 }
