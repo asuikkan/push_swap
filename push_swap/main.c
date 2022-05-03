@@ -30,10 +30,12 @@ void	error_handler(t_stack *stacks)
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
+	int		pivot;
 
 	if (argc == 1)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
-	sort_stack(stacks);
+	pivot = stacks->a[0];
+	sort_stack(stacks, pivot);
 	return (0);
 }

@@ -23,6 +23,7 @@ void	swap_a(t_stack *stacks)
 	temp = stacks->a[i - 1];
 	stacks->a[i - 1] = stacks->a[i];
 	stacks->a[i] = temp;
+	write(1, "sa\n", 3);
 }
 
 void	swap_b(t_stack *stacks)

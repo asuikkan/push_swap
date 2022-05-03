@@ -28,4 +28,5 @@ void	push_b(t_stack *stacks)
 	stacks->size_a--;
 	stacks->b[stacks->size_b] = stacks->a[stacks->size_a];
 	stacks->size_b++;
+	write(1, "pb\n", 3);
 }

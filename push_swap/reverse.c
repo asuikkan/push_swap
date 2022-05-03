@@ -24,6 +24,7 @@ void	reverse_a(t_stack *stacks)
 	while (++i <= stacks->size_a - 1)
 		stacks->a[i - 1] = stacks->a[i];
 	stacks->a[stacks->size_a - 1] = temp;
+	write(1, "rra\n", 4);
 }
 
 void	reverse_b(t_stack *stacks)

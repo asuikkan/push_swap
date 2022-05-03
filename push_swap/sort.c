@@ -12,25 +12,44 @@
 
 #include "push_swap.h"
 
-void	sort_stack(t_stack *stacks)
+static void	sort_b(t_stack *stacks)
 {
 	int	i;
-	int	bottom;
 
-	i = stacks->size_a;
-	bottom = 0;
-	while (--i > 0)
+	i = stacks->size_b - 1;
+}
+
+void	sort_stack(t_stack *stacks, int pivot)
+{
+	int	i;
+	int	j;
+	int	pivot_index;
+
+	i = stacks->size_a - 1;
+	pivot_index = 0;
+	while (i > pivot_index)
 	{
-		if (stacks->a[i] > stacks->a[i - 1])
+		if (stacks->a[i] > pivot)
 		{
-			if (i - bottom > stacks->size_a / 2)
+			if (i - 1 == pivot_index)
+				swap_a(stacks);
+			else
 			{
-				while (i > 0 && stacks->a[i] > stacks->a[i - 1])
+				j = stacks->size_a - 1;
+				while (j-- > i)
 				{
-					write(1, "ra\n", 3);
-					i--;
+					push_b(stacks);
+					pivot_index++;
 				}
+				rotate_a(stacks);
+				i = stacks->size_a - 1;
 			}
+			pivot_index++;
 		}
+		else
+			i--;
 	}
+	if (pivot_index == stacks->size_a - 1)
+		return ;
+	sort_b(stacks);
 }

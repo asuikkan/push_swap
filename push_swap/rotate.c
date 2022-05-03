@@ -24,6 +24,7 @@ void	rotate_a(t_stack *stacks)
 	while (--i >= 0)
 		stacks->a[i + 1] = stacks->a[i];
 	stacks->a[0] = temp;
+	write(1, "ra\n", 3);
 }
 
 void	rotate_b(t_stack *stacks)
