@@ -37,10 +37,12 @@ void	swap_b(t_stack *stacks)
 	temp = stacks->b[i - 1];
 	stacks->b[i - 1] = stacks->b[i];
 	stacks->b[i] = temp;
+	write(1, "sb\n", 3);
 }
 
 void	swap_a_and_b(t_stack *stacks)
 {
 	swap_a(stacks);
 	swap_b(stacks);
+	write(1, "ss\n", 3);
 }

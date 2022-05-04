@@ -39,10 +39,12 @@ void	rotate_b(t_stack *stacks)
 	while (--i >= 0)
 		stacks->b[i + 1] = stacks->b[i];
 	stacks->b[0] = temp;
+	write(1, "rb\n", 3);
 }
 
 void	rotate_a_and_b(t_stack *stacks)
 {
 	rotate_a(stacks);
 	rotate_b(stacks);
+	write(1, "rr\n", 3);
 }
