@@ -36,7 +36,7 @@ int	main(int argc, char **argv)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
 	sorted = sort_array(stacks);
-	sort_stack(stacks, 0);
+	sort_stack(stacks, sorted);
 	free(sorted);
 	free_stacks(stacks);
 	return (0);
