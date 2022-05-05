@@ -25,6 +25,7 @@ typedef struct s_stack
 	int	size_b;
 }		t_stack;
 
+int		*sort_array(t_stack *stacks);
 void	error_handler(t_stack *stacks);
 void	sort_stack(t_stack *stacks, int pivot_index);
 void	push_a(t_stack *stacks);
