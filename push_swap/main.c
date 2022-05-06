@@ -31,12 +31,14 @@ int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
 	int		*sorted;
+	int		high_limit;
 
 	if (argc == 1)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
 	sorted = sort_array(stacks);
-	sort_stack(stacks, sorted);
+	high_limit = sorted[(stacks->size_a - 1) / 4];
+	sort_stack(stacks, high_limit);
 	free(sorted);
 	free_stacks(stacks);
 	return (0);
