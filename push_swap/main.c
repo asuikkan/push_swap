@@ -27,6 +27,21 @@ void	error_handler(t_stack *stacks)
 	exit(1);
 }
 
+static int	divide_array(t_stack *stacks, int *sorted)
+{
+	int	sub_stack;
+	int	denom;
+
+	denom = 4;
+	sub_stack = stacks->size_a / denom;
+	while (sub_stack > 15)
+	{
+		denom++;
+		sub_stack = stacks->size_a / denom;
+	}
+	return (sorted[sub_stack]);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
@@ -37,8 +52,8 @@ int	main(int argc, char **argv)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
 	sorted = sort_array(stacks);
-	high_limit = sorted[(stacks->size_a - 1) / 4];
-	sort_stack(stacks, high_limit);
+	high_limit = divide_array(stacks, sorted);
+	sort_stack(stacks, high_limit, sorted[0]);
 	free(sorted);
 	free_stacks(stacks);
 	return (0);
