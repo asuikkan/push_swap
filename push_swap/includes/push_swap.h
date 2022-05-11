@@ -15,7 +15,8 @@
 
 # include "libft.h"
 
-# define LIMIT	2147483648
+# define LIMIT		2147483648
+# define MAX_INTS	1000
 
 typedef struct s_stack
 {
@@ -40,5 +41,6 @@ void	reverse_a(t_stack *stacks);
 void	reverse_b(t_stack *stacks);
 void	reverse_a_and_b(t_stack *stacks);
 t_stack	*create_stacks(int count, char **argv);
+t_stack	*read_file(char	*file);
 
 #endif

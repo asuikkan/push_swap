@@ -13,7 +13,8 @@
 #ifndef CHECKER_H
 # define CHECKER_H
 
-# define LIMIT	2147483648
+# define LIMIT		2147483648
+# define MAX_INTS	1000
 
 # include "libft.h"
 
@@ -50,6 +51,7 @@ void	(*check_push(char *line))(t_stack *);
 void	(*check_rotate(char *line))(t_stack *);
 void	(*check_reverse(char *line))(t_stack *);
 t_stack	*create_stacks(int argc, char **argv);
+t_stack	*read_file(char	*file);
 t_instr	*read_input(t_stack *stacks);
 t_instr	*new_instr(void (*func)(t_stack *));
 

@@ -19,7 +19,7 @@ NAME	= checker
 INCS	= -I ./includes -I ./libft/includes
 
 SRCS	= main.c stacker.c swap.c input.c push.c list.c execute.c	\
-		  fpointers.c rotate.c reverse.c
+		  fpointers.c rotate.c reverse.c read.c
 
 OBJS	= $(SRCS:.c=.o)
 

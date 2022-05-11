@@ -41,6 +41,21 @@ void	error_handler(t_stack *stacks, t_instr *cmds)
 	exit(1);
 }
 
+static t_stack	*options(char **argv)
+{
+	int		i;
+	t_stack	*stacks;
+
+	i = 1;
+	while (argv[1][i])
+	{
+		if (argv[1][i] == 'r')
+			stacks = read_file(argv[2]);
+		i++;
+	}
+	return (stacks);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
@@ -48,7 +63,10 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		exit(1);
-	stacks = create_stacks(argc - 1, argv);
+	if (argc == 3 && argv[1][0] == '-')
+		stacks = options(argv);
+	else
+		stacks = create_stacks(argc - 1, argv);
 	cmds = read_input(stacks);
 	execute_cmds(stacks, cmds);
 	free_stacks(stacks);
