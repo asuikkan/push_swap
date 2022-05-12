@@ -38,29 +38,23 @@ static void	(*check_instruction(char *line))(t_stack *stacks)
 
 t_instr	*read_input(t_stack *stacks)
 {
-	t_instr	*head;
-	t_instr	*instr;
-	void	(*func)(t_stack *);
-	char	*line;
-	int		ret;
+	t_instr		*head;
+	t_instr		*instr;
+	void		(*func)(t_stack *);
+	static char	buf[1024];
+	int			ret;
+	int			i;
 
+	i = 0;
 	head = NULL;
 	while (1)
 	{
-		ret = get_next_line(0, &line);
+		ret = read(0, buf, 1024);
 		if (ret == -1)
 			error_handler(stacks, head);
 		if (ret == 0)
 			break ;
-		func = check_instruction(line);
-		instr = new_instr(func);
-		if (!instr)
-			error_handler(stacks, head);
-		if (!head)
-			head = instr;
-		else
-			add_node(head, instr);
-		ft_strdel(&line);
+		check_buffer(buf);					//continue with buffer checking
 	}
 	return (head);
 }

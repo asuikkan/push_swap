@@ -21,6 +21,10 @@ INCS	= -I ./includes -I ./libft/includes
 SRCS	= main.c stacker.c stacksort.c push.c reverse.c rotate.c swap.c	\
 		  arraysort.c
 
+NMB_NM	= generator
+
+NMB_SRC	= numbergen.c
+
 OBJS	= $(SRCS:.c=.o)
 
 LIB		= -L ./libft -lft
@@ -41,4 +45,7 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+gen:
+	$(CC) $(FLAGS) $(NMB_SRC) -o $(NMB_NM)
+
+.PHONY: all clean fclean re gen
