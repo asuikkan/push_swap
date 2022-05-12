@@ -51,7 +51,6 @@ void	(*check_push(char *line))(t_stack *);
 void	(*check_rotate(char *line))(t_stack *);
 void	(*check_reverse(char *line))(t_stack *);
 t_stack	*create_stacks(int argc, char **argv);
-t_stack	*read_file(char	*file);
 t_instr	*read_input(t_stack *stacks);
 t_instr	*new_instr(void (*func)(t_stack *));
 

@@ -42,21 +42,6 @@ static int	divide_array(t_stack *stacks, int *sorted)
 	return (sorted[sub_stack]);
 }
 
-static t_stack	*options(char **argv)
-{
-	int		i;
-	t_stack	*stacks;
-
-	i = 1;
-	while (argv[1][i])
-	{
-		if (argv[1][i] == 'r')
-			stacks = read_file(argv[2]);
-		i++;
-	}
-	return (stacks);
-}
-
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
@@ -65,10 +50,7 @@ int	main(int argc, char **argv)
 
 	if (argc == 1)
 		exit(1);
-	if (argc == 3 && argv[1][0] == '-')
-		stacks = options(argv);
-	else
-		stacks = create_stacks(argc - 1, argv);
+	stacks = create_stacks(argc - 1, argv);
 	sorted = sort_array(stacks);
 	high_limit = divide_array(stacks, sorted);
 	sort_stack(stacks, high_limit, sorted[0]);
