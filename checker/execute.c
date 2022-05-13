@@ -14,8 +14,10 @@
 
 static void	print_stacks(t_stack *stacks)
 {
-	int	high;
+	int			high;
+	static int	count;
 
+	ft_printf(" | count: %d", ++count);
 	if (stacks->size_a > stacks->size_b)
 		high = stacks->size_a - 1;
 	else

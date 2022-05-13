@@ -19,6 +19,7 @@ void	push_a(t_stack *stacks)
 	stacks->size_b--;
 	stacks->a[stacks->size_a] = stacks->b[stacks->size_b];
 	stacks->size_a++;
+	ft_printf("INSTRUCTION: pa");
 }
 
 void	push_b(t_stack *stacks)
@@ -28,10 +29,5 @@ void	push_b(t_stack *stacks)
 	stacks->size_a--;
 	stacks->b[stacks->size_b] = stacks->a[stacks->size_a];
 	stacks->size_b++;
-}
-
-void	push_a_and_b(t_stack *stacks)
-{
-	push_a(stacks);
-	push_b(stacks);
+	ft_printf("INSTRUCTION: pb");
 }

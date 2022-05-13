@@ -15,11 +15,41 @@
 #include <stdlib.h>
 #include <fcntl.h>
 
+static int	check_duplicate(int nb, int array[1000], int count)
+{
+	int	i;
+
+	i = 0;
+	while (i < count)
+	{
+		if (array[i] == nb)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 static void	gen_numbers(FILE *fptr, int count)
 {
-	while (count--)
+	int			array[1000];
+	int			nb;
+	static int	i;
+
+	i = 0;
+	while (count)
 	{
-		fprintf(fptr, "%d\n", rand() % 1000);
+		nb = rand() % 1000;
+		if (!check_duplicate(nb, array, i))
+			continue ;
+		else
+		{
+			array[i] = nb;
+			i++;
+			fprintf(fptr, "%d", nb);
+			if (count != 1)
+				fprintf(fptr, " ");
+			count--;
+		}
 	}
 }
 

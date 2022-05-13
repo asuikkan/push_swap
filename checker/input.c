@@ -6,7 +6,7 @@
 /*   By: asuikkan <asuikkan@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/20 11:13:38 by asuikkan          #+#    #+#             */
-/*   Updated: 2022/04/20 11:13:40 by asuikkan         ###   ########.fr       */
+/*   Updated: 2022/05/13 12:03:15 by asuikkan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,55 @@ static void	(*check_instruction(char *line))(t_stack *stacks)
 	return (NULL);
 }
 
+static void	(*check_buffer(char *buf))(t_stack *stacks)
+{
+	int		i;
+	char	line[4];
+
+	i = -1;
+	while (buf[++i])
+	{
+		if (buf[i] == '\n')
+		{
+			line[i] = '\0';
+			return (check_instruction(line));
+		}
+		line[i] = buf[i];
+	}
+	read(0, buf, 1);
+	if (buf[0] == '\n')
+	{
+		line[i] = '\0';
+		return (check_instruction(line));
+	}
+	return (NULL);
+}
+
 t_instr	*read_input(t_stack *stacks)
 {
 	t_instr		*head;
 	t_instr		*instr;
 	void		(*func)(t_stack *);
-	static char	buf[1024];
+	static char	buf[4];
 	int			ret;
-	int			i;
 
-	i = 0;
 	head = NULL;
 	while (1)
 	{
-		ret = read(0, buf, 1024);
+		ret = read(0, buf, 3);
 		if (ret == -1)
 			error_handler(stacks, head);
 		if (ret == 0)
 			break ;
-		check_buffer(buf);					//continue with buffer checking
+		buf[ret] = '\0';
+		func = check_buffer(buf);
+		instr = new_instr(func);
+		if (!instr)
+			error_handler(stacks, head);
+		if (!head)
+			head = instr;
+		else
+			add_node(head, instr);
 	}
 	return (head);
 }

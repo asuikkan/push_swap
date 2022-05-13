@@ -28,7 +28,7 @@ typedef struct s_stack
 
 int		*sort_array(t_stack *stacks);
 void	error_handler(t_stack *stacks);
-void	sort_stack(t_stack *stacks, int high_limit, int highest);
+void	sort_stack(t_stack *stacks, int high_limit);
 void	push_a(t_stack *stacks);
 void	push_b(t_stack *stacks);
 void	swap_a(t_stack *stacks);

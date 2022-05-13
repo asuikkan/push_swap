@@ -105,7 +105,7 @@ static void	sort_small(t_stack *stacks)
 	}
 }
 
-static int	is_sorted(t_stack *stacks, int highest)
+static int	is_sorted(t_stack *stacks)
 {
 	int	i;
 	int	errors;
@@ -115,19 +115,7 @@ static int	is_sorted(t_stack *stacks, int highest)
 	while (--i > 0)
 	{
 		if (stacks->a[i] > stacks->a[i - 1])
-		{
-			if (stacks->a[i] == highest)
-				errors++;
-			else
-				return (0);
-		}
-	}
-	if (errors)
-	{
-		if (stacks->size_a < 4)
-			sort_small(stacks);
-		else
-			reset(stacks);
+			return (0);
 	}
 	merge(stacks);
 	return (1);
@@ -191,13 +179,13 @@ static void	push_lows(t_stack *stacks, int high_limit)
 		sort_a(stacks);
 }
 
-void	sort_stack(t_stack *stacks, int high_limit, int highest)
+void	sort_stack(t_stack *stacks, int high_limit)
 {
-	if (is_sorted(stacks, highest))
+	if (is_sorted(stacks))
 		return ;
 	if (stacks->size_a < 4)
 		sort_small(stacks);
 	else
 		push_lows(stacks, high_limit);
-	sort_stack(stacks, high_limit, highest);
+	sort_stack(stacks, high_limit);
 }

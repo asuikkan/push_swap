@@ -23,6 +23,10 @@ SRCS	= main.c stacker.c swap.c input.c push.c list.c execute.c	\
 
 OBJS	= $(SRCS:.c=.o)
 
+NMB_NM	= generator
+
+NMB_SRC	= numbergen.c
+
 LIB		= -L ./libft -lft
 
 all: $(NAME)
@@ -40,5 +44,8 @@ fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+gen:
+	$(CC) $(FLAGS) $(NMB_SRC) -o $(NMB_NM)
 
 .PHONY: all clean fclean re
