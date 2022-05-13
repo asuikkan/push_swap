@@ -151,7 +151,34 @@ static void	sort_a(t_stack *stacks)
 	}
 }
 
-static void	push_lows(t_stack *stacks, int high_limit)
+static void	rotater(t_stack *stacks, int i)
+{
+	int	value;
+
+	value = stacks->a[i];
+	while (++i < stacks->size_a)
+	{
+		if (stacks->size_b > 1 && stacks->b[stacks->size_b - 1] > value)
+			rotate_a_and_b(stacks);
+		else
+			rotate_a(stacks);
+	}
+}
+
+static void	reverser(t_stack *stacks, int i)
+{
+	int	value;
+
+	value = stacks->a[i];
+	while (--i > -2)
+	{
+		if (stacks->size_b > 1 && stacks->b[stacks->size_b - 1] > value)
+			rotate_b(stacks);
+		reverse_a(stacks);
+	}
+}
+
+static void	pusher(t_stack *stacks, int pivot)
 {
 	int	top;
 	int	bottom;
@@ -160,32 +187,40 @@ static void	push_lows(t_stack *stacks, int high_limit)
 	bottom = -1;
 	while (--top > ++bottom)
 	{
-		if (stacks->a[top] < high_limit)
+		if (stacks->a[top] < pivot)
 		{
-			while (++top < stacks->size_a)
-				check_rotate_b(stacks);
+			rotater(stacks, top);
 			push_b(stacks);
-			break ;
 		}
-		if (stacks->a[bottom] < high_limit)
+		else if (stacks->a[bottom] < pivot)
 		{
-			while (--bottom >= -1)
-				check_rev_b(stacks);
+			reverser(stacks, bottom);
 			push_b(stacks);
-			break ;
 		}
 	}
-	if (top <= bottom)
-		sort_a(stacks);
 }
 
-void	sort_stack(t_stack *stacks, int high_limit)
+void	sort_stack(t_stack *stacks, int *sorted, int split)
 {
+	int	split_count;
+	int	pivot_point;
+
+	pivot_point = 0;
 	if (is_sorted(stacks))
 		return ;
 	if (stacks->size_a < 4)
 		sort_small(stacks);
 	else
-		push_lows(stacks, high_limit);
-	sort_stack(stacks, high_limit);
+	{
+		split_count = 1;
+		pivot_point = stacks->size_a - split * split_count;
+		while (pivot_point > 0)
+		{
+			pusher(stacks, sorted[pivot_point]);
+			split_count++;
+			pivot_point = stacks->size_a - split * split_count;
+		}
+		sort_a(stacks);
+	}
+	sort_stack(stacks, sorted, split);
 }

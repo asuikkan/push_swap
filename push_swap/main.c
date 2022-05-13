@@ -27,33 +27,33 @@ void	error_handler(t_stack *stacks)
 	exit(1);
 }
 
-static int	divide_array(t_stack *stacks, int *sorted)
+static int	divide_array(t_stack *stacks)
 {
-	int	sub_stack;
+	int	split;
 	int	denom;
 
 	denom = 4;
-	sub_stack = stacks->size_a / denom;
-	while (sub_stack > 15)
+	split = (stacks->size_a - 1) / denom;
+	while (split > 15)
 	{
 		denom++;
-		sub_stack = stacks->size_a / denom;
+		split = (stacks->size_a - 1) / denom;
 	}
-	return (sorted[sub_stack]);
+	return (split);
 }
 
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
 	int		*sorted;
-	int		high_limit;
+	int		split;
 
 	if (argc == 1)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
 	sorted = sort_array(stacks);
-	high_limit = divide_array(stacks, sorted);
-	sort_stack(stacks, high_limit);
+	split = divide_array(stacks);
+	sort_stack(stacks, sorted, split);
 	free(sorted);
 	free_stacks(stacks);
 	return (0);
