@@ -53,7 +53,7 @@ int	main(int argc, char **argv)
 	stacks = create_stacks(argc - 1, argv);
 	sorted = sort_array(stacks);
 	split = divide_array(stacks);
-	sort_stack(stacks, sorted, split);
+	sort_stack(stacks, sorted, split, stacks->size_a);
 	free(sorted);
 	free_stacks(stacks);
 	return (0);
