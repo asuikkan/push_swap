@@ -143,7 +143,7 @@ static void	rotater(t_stack *stacks, int i)
 		pos = find_position(stacks->b, stacks->size_b, value);
 		if (pos == stacks->size_b)
 			reset_b(stacks);
-		if (pos < stacks->size_b / 2 && pos < (stacks->size_a - i) - (stacks->size_b - pos))
+		if (pos < (stacks->size_b - pos) - (stacks->size_a - i))
 		{
 			while (pos-- < -1)
 				reverse_b(stacks);
@@ -173,10 +173,24 @@ static void	reverser(t_stack *stacks, int i)		//continue implementing reverse!
 	pos = find_position(stacks->b, stacks->size_b, value);
 	if (pos == stacks->size_b)
 		reset_b(stacks);
-	while (--i > -2)
+	if (stacks->size_b - pos < pos - i)
 	{
-		reverse_a(stacks);
+		while (pos++ < stacks->size_b - 1)
+			rotate_b(stacks);
 	}
+	else
+	{
+		while (i > -1 && pos > -1)
+		{
+			reverse_a_and_b(stacks);
+			i--;
+			pos--;
+		}
+		while (pos-- > -1)
+			reverse_b(stacks);
+	}
+	while (i-- > -1)
+		reverse_a(stacks);
 }
 
 static void	pusher(t_stack *stacks, int pivot)
