@@ -48,13 +48,11 @@ static int	find_position(int *stack, int size, int value)
 
 	i = size;
 	pos = size;
-	while (--i >= 0)
+	while (--i > 0)
 	{
-		if (stack[i] > value)
-			pos = i - 1;
+		if (stack[i] > value && stack[i - 1] < value)
+			return (i - 1);
 	}
-	if (pos < 0)
-		pos = size - 1;
 	return (pos);
 }
 
@@ -141,7 +139,7 @@ static void	rotater(t_stack *stacks, int i)
 	if (stacks->size_b > 1)
 	{
 		pos = find_position(stacks->b, stacks->size_b, value);
-		if (pos == stacks->size_b)
+		if (pos == stacks->size_b && stacks->b[0] < value)
 			reset_b(stacks);
 		if (pos < (stacks->size_b - pos) - (stacks->size_a - i))
 		{
@@ -164,30 +162,33 @@ static void	rotater(t_stack *stacks, int i)
 		rotate_a(stacks);
 }
 
-static void	reverser(t_stack *stacks, int i)		//continue implementing reverse!
+static void	reverser(t_stack *stacks, int i)
 {
 	int	value;
 	int	pos;
 
 	value = stacks->a[i];
-	pos = find_position(stacks->b, stacks->size_b, value);
-	if (pos == stacks->size_b)
-		reset_b(stacks);
-	if (stacks->size_b - pos < pos - i)
+	if (stacks->size_b > 1)
 	{
-		while (pos++ < stacks->size_b - 1)
-			rotate_b(stacks);
-	}
-	else
-	{
-		while (i > -1 && pos > -1)
+		pos = find_position(stacks->b, stacks->size_b, value);
+		if (pos == stacks->size_b && stacks->b[0] < value)
+			reset_b(stacks);
+		if (stacks->size_b - pos < pos - i)
 		{
-			reverse_a_and_b(stacks);
-			i--;
-			pos--;
+			while (pos++ < stacks->size_b - 1)
+				rotate_b(stacks);
 		}
-		while (pos-- > -1)
-			reverse_b(stacks);
+		else
+		{
+			while (i > -1 && pos > -1)
+			{
+				reverse_a_and_b(stacks);
+				i--;
+				pos--;
+			}
+			while (pos-- > -1)
+				reverse_b(stacks);
+		}
 	}
 	while (i-- > -1)
 		reverse_a(stacks);
@@ -221,11 +222,26 @@ static void	pusher(t_stack *stacks, int pivot)
 
 static void	sort_a(t_stack *stacks)
 {
+	int	min;
+	int	i;
+
 	while (!is_sorted(stacks->a, stacks->size_a))
 	{
+		i = stacks->size_a;
+		min = stacks->a[stacks->size_a - 1];
 		if (stacks->size_a < 4)
 			sort_small(stacks);
+		else
+		{
+			while (--i >= 0)
+			{
+				if (stacks->a[i] < min)
+					min = stacks->a[i];
+			}
+			pusher(stacks, min);
+		}
 	}
+	reset_b(stacks);
 	merge(stacks);
 }
 
@@ -242,14 +258,13 @@ void	sort_stack(t_stack *stacks, int *sorted, int split, int count)
 	else
 	{
 		split_count = 1;
-		pivot_point = stacks->size_a - split * split_count;
+		pivot_point = count - split * split_count;
 		while (pivot_point > 0)
 		{
 			pusher(stacks, sorted[pivot_point]);
 			split_count++;
 			pivot_point = count - split * split_count;
 		}
-		reset_b(stacks);
 		sort_a(stacks);
 	}
 }
