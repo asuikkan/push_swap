@@ -12,35 +12,6 @@
 
 #include "push_swap.h"
 
-static void	reset_b(t_stack *stacks)
-{
-	int	i;
-	int	max_i;
-	int	max;
-
-	i = stacks->size_b - 1;
-	max_i = i;
-	max = stacks->b[i];
-	while (--i >= 0)
-	{
-		if (stacks->b[i] > max)
-		{
-			max = stacks->b[i];
-			max_i = i;
-		}
-	}
-	if (max_i > stacks->size_b / 2)
-	{
-		while (++max_i < stacks->size_b)
-			rotate_b(stacks);
-	}
-	else
-	{
-		while (stacks->size_b > 1 && max_i-- > -1)
-			reverse_b(stacks);
-	}
-}
-
 static int	find_position(int *stack, int size, int value)
 {
 	int	i;
@@ -68,35 +39,6 @@ static int	is_sorted(int *stack, int size)
 	}
 	return (1);
 }
-
-/*static void	reset(t_stack *stacks)
-{
-	int	min;
-	int	min_index;
-	int	i;
-
-	min = stacks->a[stacks->size_a - 1];
-	min_index = stacks->size_a - 1;
-	i = stacks->size_a;
-	while (--i >= 0)
-	{
-		if (stacks->a[i] > min)
-		{
-			min = stacks->a[i];
-			min_index = i;
-		}
-	}
-	if (min_index > stacks->size_a / 2)
-	{
-		while (min_index++ < stacks->size_a)
-			rotate_a(stacks);
-	}
-	else
-	{
-		while (min_index-- > -1)
-			reverse_a(stacks);
-	}
-}*/
 
 static void	merge(t_stack *stacks)
 {
@@ -130,6 +72,23 @@ static void	sort_small(t_stack *stacks)
 	}
 }
 
+static int	count_moves(t_stack *stacks)
+{
+	int	i;
+	int	value;
+	int	pos;
+	int	moves;
+
+	i = stacks->size_a;
+	while (--i <= 0)
+	{
+		value = stacks->a[i];
+		pos = find_position(stacks->b, stacks->size_b, value);
+		if ((stacks->size_b - pos) - (stacks->size_a - i))      //do calculations for move count
+
+	}
+}
+
 static void	rotater(t_stack *stacks, int i)
 {
 	int	value;
@@ -139,8 +98,6 @@ static void	rotater(t_stack *stacks, int i)
 	if (stacks->size_b > 1)
 	{
 		pos = find_position(stacks->b, stacks->size_b, value);
-		if (pos == stacks->size_b && stacks->b[0] < value)
-			reset_b(stacks);
 		if (pos < (stacks->size_b - pos) - (stacks->size_a - i))
 		{
 			while (pos-- < -1)
@@ -196,32 +153,11 @@ static void	reverser(t_stack *stacks, int i)
 
 static void	pusher(t_stack *stacks)
 {
-	
-}
+	int	target;
 
-static void	sort_a(t_stack *stacks)
-{
-	int	min;
-	int	i;
-
-	while (!is_sorted(stacks->a, stacks->size_a))
-	{
-		i = stacks->size_a;
-		min = stacks->a[stacks->size_a - 1];
-		if (stacks->size_a < 4)
-			sort_small(stacks);
-		else
-		{
-			while (--i >= 0)
-			{
-				if (stacks->a[i] < min)
-					min = stacks->a[i];
-			}
-			pusher(stacks, min);
-		}
-	}
-	reset_b(stacks);
-	merge(stacks);
+	while (stacks->size_b < 2)
+		push_b(stacks);
+	target = count_moves(stacks);
 }
 
 void	sort_stack(t_stack *stacks, int *sorted, int count)
@@ -237,6 +173,5 @@ void	sort_stack(t_stack *stacks, int *sorted, int count)
 	else
 	{
 		pusher(stacks);
-		sort_a(stacks);
 	}
 }
