@@ -194,30 +194,9 @@ static void	reverser(t_stack *stacks, int i)
 		reverse_a(stacks);
 }
 
-static void	pusher(t_stack *stacks, int pivot)
+static void	pusher(t_stack *stacks)
 {
-	int	top;
-	int	bottom;
-
-	top = stacks->size_a;
-	bottom = -1;
-	while (--top > ++bottom)
-	{
-		if (stacks->a[top] <= pivot)
-		{
-			rotater(stacks, top);
-			push_b(stacks);
-			top = stacks->size_a;
-			bottom = -1;
-		}
-		else if (stacks->a[bottom] <= pivot)
-		{
-			reverser(stacks, bottom);
-			push_b(stacks);
-			top = stacks->size_a;
-			bottom = -1;
-		}
-	}
+	
 }
 
 static void	sort_a(t_stack *stacks)
@@ -245,7 +224,7 @@ static void	sort_a(t_stack *stacks)
 	merge(stacks);
 }
 
-void	sort_stack(t_stack *stacks, int *sorted, int split, int count)
+void	sort_stack(t_stack *stacks, int *sorted, int count)
 {
 	int	split_count;
 	int	pivot_point;
@@ -257,14 +236,7 @@ void	sort_stack(t_stack *stacks, int *sorted, int split, int count)
 		sort_small(stacks);
 	else
 	{
-		split_count = 1;
-		pivot_point = count - split * split_count;
-		while (pivot_point > 0)
-		{
-			pusher(stacks, sorted[pivot_point]);
-			split_count++;
-			pivot_point = count - split * split_count;
-		}
+		pusher(stacks);
 		sort_a(stacks);
 	}
 }
