@@ -30,16 +30,11 @@ void	error_handler(t_stack *stacks)
 int	main(int argc, char **argv)
 {
 	t_stack	*stacks;
-	int		*sorted;
-	int		split;
 
 	if (argc == 1)
 		exit(1);
 	stacks = create_stacks(argc - 1, argv);
-	sorted = sort_array(stacks);
-	split = divide_array(stacks);
-	sort_stack(stacks, sorted, stacks->size_a);
-	free(sorted);
+	sort_stack(stacks);
 	free_stacks(stacks);
 	return (0);
 }

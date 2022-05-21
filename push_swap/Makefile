@@ -18,8 +18,7 @@ NAME	= push_swap
 
 INCS	= -I ./includes -I ./libft/includes
 
-SRCS	= main.c stacker.c stacksort.c push.c reverse.c rotate.c swap.c	\
-		  arraysort.c
+SRCS	= main.c stacker.c stacksort.c push.c reverse.c rotate.c swap.c
 
 NMB_NM	= generator
 
