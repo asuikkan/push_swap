@@ -12,22 +12,31 @@
 
 #include "push_swap.h"
 
-static void	reset_b(t_stack *stacks)
+static int	find_highest(int *stack, int size)
 {
+	int	i;
 	int	max;
 	int	max_i;
-	int	i;
 
-	i = stacks->size_b - 1;
-	max = stacks->b[i];
+	i = size - 1;
+	max_i = i;
+	max = stack[max_i];
 	while (--i >= 0)
 	{
-		if (stacks->b[i] > max)
+		if (stack[i] > max)
 		{
-			max = stacks->b[i];
+			max = stack[i];
 			max_i = i;
 		}
 	}
+	return (max_i);
+}
+
+static void	reset_b(t_stack *stacks)
+{
+	int	max_i;
+
+	max_i = find_highest(stacks->b, stacks->size_b);
 	if (max_i > (stacks->size_b - 1) / 2)
 	{
 		while (max_i++ < stacks->size_b - 1)
@@ -42,17 +51,29 @@ static void	reset_b(t_stack *stacks)
 
 static int	find_position(int *stack, int size, int value)
 {
+	int	start;
 	int	i;
-	int	pos;
 
-	i = size;
-	pos = size;
-	while (--i > 0)
+	start = find_highest(stack, size);
+	if (value > stack[start])
+		return (start);
+	i = start;
+	while (--i != start)
 	{
-		if (stack[i] > value && stack[i - 1] < value)
-			return (i - 1);
+		if (i == -1)
+			i = size;
+		else if (i == size - 1)
+		{
+			if (stack[i] < value && stack[0] > value)
+				return (i);
+		}
+		else
+		{
+			if (stack[i] < value && stack[i + 1] > value)
+				return (i);
+		}
 	}
-	return (pos);
+	return (start);
 }
 
 static int	is_sorted(int *stack, int size)
@@ -134,72 +155,57 @@ static int	count_moves(t_stack *stacks)
 			fewest = moves;
 			target_i = i;
 		}
-		//if (target_i == i)
-		//	ft_printf("pos = %d\n", pos);
 	}
 	//ft_printf("moves = %d\n", moves);
 	//ft_printf("target_i = %d\n", target_i);
 	return (target_i);
 }
 
-static void	rotater(t_stack *stacks, int i)
+static void	rotate_to_pos(t_stack *stacks, int target_i)
 {
 	int	value;
+	int	target;
 	int	pos;
 
-	value = stacks->a[i];
+	value = stacks->a[target_i];
 	pos = find_position(stacks->b, stacks->size_b, value);
-	if (pos == stacks->size_b)
-		reset_b(stacks);
-	//ft_printf("pos = %d\n", pos);
-	if (pos < (stacks->size_b - 1 - pos) - (stacks->size_a - 1 - i))
+	target = stacks->b[pos];
+	//ft_printf("target = %d\n", target);
+	//ft_printf("value = %d\n", value);
+	if (stacks->size_a - 1 - target_i <= stacks->size_b - 1 - pos)
 	{
-		while (pos-- > -1)
-			reverse_b(stacks);
+		if (stacks->size_b - 1 - pos <= target_i + 1)
+		{
+			while (value != stacks->a[stacks->size_a - 1])
+				rotate_a_and_b(stacks);
+			while (target != stacks->b[stacks->size_b - 1])
+				rotate_b(stacks);
+		}
+		else
+		{
+			while (target != stacks->b[stacks->size_b - 1])
+				reverse_a_and_b(stacks);
+			while (value != stacks->a[stacks->size_a - 1])
+				reverse_a(stacks);
+		}
 	}
 	else
 	{
-		while (i < stacks->size_a - 1 && pos < stacks->size_b - 1)
+		if (stacks->size_a - 1 - target_i <= pos + 1)
 		{
-			rotate_a_and_b(stacks);
-			i++;
-			pos++;
+			while (target != stacks->b[stacks->size_b - 1])
+				rotate_a_and_b(stacks);
+			while (value != stacks->a[stacks->size_a - 1])
+				rotate_a(stacks);
 		}
-		while (pos++ < stacks->size_b - 1)
-			rotate_b(stacks);
-	}
-	while (++i < stacks->size_a)
-		rotate_a(stacks);
-}
-
-static void	reverser(t_stack *stacks, int i)
-{
-	int	value;
-	int	pos;
-
-	value = stacks->a[i];
-	pos = find_position(stacks->b, stacks->size_b, value);
-	if (pos == stacks->size_b)
-		reset_b(stacks);
-	//ft_printf("pos = %d\n", pos);
-	if (stacks->size_b - pos < pos - i)
-	{
-		while (pos++ < stacks->size_b)
-			rotate_b(stacks);
-	}
-	else
-	{
-		while (i > -1 && pos > -1)
+		else
 		{
-			reverse_a_and_b(stacks);
-			i--;
-			pos--;
+			while (value != stacks->a[stacks->size_a - 1])
+				reverse_a_and_b(stacks);
+			while (target != stacks->b[stacks->size_b - 1])
+				reverse_b(stacks);
 		}
-		while (pos-- > -1)
-			reverse_b(stacks);
 	}
-	while (i-- > -1)
-		reverse_a(stacks);
 }
 
 static void	pusher(t_stack *stacks)
@@ -208,15 +214,13 @@ static void	pusher(t_stack *stacks)
 
 	while (stacks->size_b < 2)
 		push_b(stacks);
-	while (stacks->size_a > 0)
+	while (stacks->size_a > 1)
 	{
 		target_i = count_moves(stacks);
-		if (target_i >= (stacks->size_a - 1) / 2)
-			rotater(stacks, target_i);
-		else
-			reverser(stacks, target_i);
+		rotate_to_pos(stacks, target_i);
 		push_b(stacks);
 	}
+	reset_b(stacks);
 }
 
 void	sort_stack(t_stack *stacks)
