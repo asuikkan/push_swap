@@ -121,103 +121,116 @@ static void	sort_small(t_stack *stacks)
 	}
 }
 
-static int	count_moves(t_stack *stacks)
+static int	count_moves(t_stack *stacks, int *target[4])
 {
+	int	temp[3];
 	int	i;
+	int	j;
 	int	pos;
-	int	moves;
-	int	fewest;
 	int	target_i;
+	int	lowest;
 
-	fewest = -1;
 	i = stacks->size_a;
 	while (--i >= 0)
 	{
 		pos = find_position(stacks->b, stacks->size_b, stacks->a[i]);
-		if (stacks->size_a - 1 - i <= stacks->size_b - 1 - pos)
+		if (stacks->size_a - 1 - i >= stacks->size_b - 1 - pos)
 		{
-			moves = stacks->size_b - 1 - pos;
-			if (moves > i + 1)
-				moves = i + 1;
-			if (moves > (stacks->size_b - 1 - pos) + (i + 1))
-				moves = (stacks->size_b - 1 - pos) + (i + 1);
+			temp[0] = stacks->size_a - 1 - i;
+			temp[1] = pos + 1;
+			temp[2] = i + 1 + stacks->size_b - 1 - pos;
 		}
 		else
 		{
-			moves = stacks->size_a - 1 - i;
-			if (moves > pos + 1)
-				moves = pos + 1;
-			if (moves > (stacks->size_a - 1 - i) + (pos + 1))
-				moves = (stacks->size_a - 1 - i) + (pos + 1);
+			temp[0] = stacks->size_b - 1 - i;
+			temp[1] = i + 1;
+			temp[2] = pos + 1 + stacks->size_a - 1 - i;
 		}
-		if (fewest == -1 || moves < fewest)
+		lowest = -1;
+		j = -1;
+		while (++j < 4)
 		{
-			fewest = moves;
-			target_i = i;
+			if (lowest == -1 || temp[j] < lowest)
+				lowest = temp[j];
+		}
+		j = -1;
+		while (++j < 4)
+		{
+			if (*target[j] == -1 || lowest < *target[j])
+			{
+				*target = temp;
+				target_i = i;
+				break ;
+			}
 		}
 	}
-	//ft_printf("moves = %d\n", moves);
-	//ft_printf("target_i = %d\n", target_i);
 	return (target_i);
 }
 
-static void	rotate_to_pos(t_stack *stacks, int target_i)
+static void	rotater(t_stack *stacks, int target_i)
 {
-	int	value;
-	int	target;
 	int	pos;
+	int	val_b;
+	int	val_a;
 
-	value = stacks->a[target_i];
-	pos = find_position(stacks->b, stacks->size_b, value);
-	target = stacks->b[pos];
-	//ft_printf("target = %d\n", target);
-	//ft_printf("value = %d\n", value);
-	if (stacks->size_a - 1 - target_i <= stacks->size_b - 1 - pos)
+	val_a = stacks->a[target_i];
+	pos = find_position(stacks->b, stacks->size_b, val_a);
+	val_b = stacks->b[pos];
+	if (stacks->size_a - 1 - target_i >= stacks->size_b - 1 - pos)
 	{
-		if (stacks->size_b - 1 - pos <= target_i + 1)
-		{
-			while (value != stacks->a[stacks->size_a - 1])
-				rotate_a_and_b(stacks);
-			while (target != stacks->b[stacks->size_b - 1])
-				rotate_b(stacks);
-		}
-		else
-		{
-			while (target != stacks->b[stacks->size_b - 1])
-				reverse_a_and_b(stacks);
-			while (value != stacks->a[stacks->size_a - 1])
-				reverse_a(stacks);
-		}
+		while (stacks->b[stacks->size_b - 1] != val_b)
+			rotate_a_and_b(stacks);
+		while (stacks->a[stacks->size_a - 1] != val_a)
+			rotate_a(stacks);
 	}
 	else
 	{
-		if (stacks->size_a - 1 - target_i <= pos + 1)
-		{
-			while (target != stacks->b[stacks->size_b - 1])
-				rotate_a_and_b(stacks);
-			while (value != stacks->a[stacks->size_a - 1])
-				rotate_a(stacks);
-		}
-		else
-		{
-			while (value != stacks->a[stacks->size_a - 1])
-				reverse_a_and_b(stacks);
-			while (target != stacks->b[stacks->size_b - 1])
-				reverse_b(stacks);
-		}
+		while (stacks->a[stacks->size_a - 1] != val_a)
+			rotate_a_and_b(stacks);
+		while (stacks->b[stacks->size_b - 1] != val_b)
+			rotate_b(stacks);
 	}
+}
+
+static void	reverser(t_stack *stacks, int target_i)   //continue from here!
+{
+	int	pos;
+
+	pos = find_position(stacks->b, stacks->size_b, stacks->a[target_i]);
+}
+
+static void	rot_rev(t_stack *stacks, int target_i)
+{
+	int	pos;
+
+	pos = find_position(stacks->b, stacks->size_b, stacks->a[target_i]);
+}
+
+static void	rotate_to_pos(t_stack *stacks, int target[4], int target_i)
+{
+	if (target[0] <= target[1] && target[0] <= target[2])
+		rotater(stacks, target_i);
+	else if (target[1] <= target[0] && target[1] <= target[2])
+		reverser(stacks, target_i);
+	else
+		rot_rev(stacks, target_i);
 }
 
 static void	pusher(t_stack *stacks)
 {
+	int	target[4];
+	int	i;
 	int	target_i;
 
 	while (stacks->size_b < 2)
 		push_b(stacks);
 	while (stacks->size_a > 1)
 	{
-		target_i = count_moves(stacks);
-		rotate_to_pos(stacks, target_i);
+		i = 0;
+		while (i < 4)
+			target[i++] = -1;
+		target_i = count_moves(stacks, &target);
+		rotate_to_pos(stacks, target, target_i);
 		push_b(stacks);
 	}
 	reset_b(stacks);
