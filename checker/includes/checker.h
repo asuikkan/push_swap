@@ -44,13 +44,12 @@ void	rotate_a_and_b(t_stack *stacks);
 void	reverse_a(t_stack *stacks);
 void	reverse_b(t_stack *stacks);
 void	reverse_a_and_b(t_stack *stacks);
-void	execute_cmds(t_stack *stacks, t_instr *cmds);
+void	execute_cmds(t_stack *stacks, t_instr *cmds, int print_flag);
 void	(*check_swap(char *line))(t_stack *);
 void	(*check_push(char *line))(t_stack *);
 void	(*check_rotate(char *line))(t_stack *);
 void	(*check_reverse(char *line))(t_stack *);
-t_stack	*create_stacks(int argc, char **argv);
+t_stack	*create_stacks(int argc, char **argv, int start);
 t_instr	*read_input(t_stack *stacks);
-t_instr	*new_instr(void (*func)(t_stack *));
 
 #endif

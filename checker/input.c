@@ -22,6 +22,20 @@ static void	add_node(t_instr *head, t_instr *new)
 	temp->next = new;
 }
 
+static t_instr	*new_instr(void (*func)(t_stack *))
+{
+	t_instr	*new;
+
+	if (!func)
+		return (NULL);
+	new = (t_instr *)malloc(sizeof(t_instr));
+	if (!new)
+		return (NULL);
+	new->func = func;
+	new->next = NULL;
+	return (new);
+}
+
 static void	(*check_instruction(char *line))(t_stack *stacks)
 {
 	char	*temp;

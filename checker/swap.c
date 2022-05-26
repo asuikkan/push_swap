@@ -23,7 +23,6 @@ void	swap_a(t_stack *stacks)
 	temp = stacks->a[i - 1];
 	stacks->a[i - 1] = stacks->a[i];
 	stacks->a[i] = temp;
-	ft_printf("INSTRUCTION: sa");
 }
 
 void	swap_b(t_stack *stacks)
@@ -37,7 +36,6 @@ void	swap_b(t_stack *stacks)
 	temp = stacks->b[i - 1];
 	stacks->b[i - 1] = stacks->b[i];
 	stacks->b[i] = temp;
-	ft_printf("INSTRUCTION: sb");
 }
 
 void	swap_a_and_b(t_stack *stacks)
@@ -59,5 +57,4 @@ void	swap_a_and_b(t_stack *stacks)
 		stacks->b[i - 1] = stacks->b[i];
 		stacks->b[i] = temp;
 	}
-	ft_printf("INSTRUCTION: ss");
 }

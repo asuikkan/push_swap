@@ -22,7 +22,6 @@ void	reverse_a(t_stack *stacks)
 	while (++i <= stacks->size_a - 1)
 		stacks->a[i - 1] = stacks->a[i];
 	stacks->a[stacks->size_a - 1] = temp;
-	ft_printf("INSTRUCTION: rra");
 }
 
 void	reverse_b(t_stack *stacks)
@@ -35,7 +34,6 @@ void	reverse_b(t_stack *stacks)
 	while (++i <= stacks->size_b - 1)
 		stacks->b[i - 1] = stacks->b[i];
 	stacks->b[stacks->size_b - 1] = temp;
-	ft_printf("INSTRUCTION: rrb");
 }
 
 void	reverse_a_and_b(t_stack *stacks)
@@ -53,5 +51,4 @@ void	reverse_a_and_b(t_stack *stacks)
 	while (++i <= stacks->size_b - 1)
 		stacks->b[i - 1] = stacks->b[i];
 	stacks->b[stacks->size_b - 1] = temp;
-	ft_printf("INSTRUCTION: rrr");
 }

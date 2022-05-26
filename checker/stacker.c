@@ -68,13 +68,13 @@ static int	validate_arg(int *integer, char *arg)
 	return (1);
 }
 
-t_stack	*create_stacks(int count, char **argv)
+t_stack	*create_stacks(int count, char **argv, int start)
 {
 	t_stack	*stacks;
 	int		i;
 
 	stacks = initialize(count);
-	i = 1;
+	i = start;
 	while (--count >= 0)
 	{
 		if (!validate_arg(&stacks->a[count], argv[i++]))

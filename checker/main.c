@@ -45,14 +45,23 @@ void	error_handler(t_stack *stacks, t_instr *cmds)
 
 int	main(int argc, char **argv)
 {
-	t_stack	*stacks;
-	t_instr	*cmds;
+	int			print_flag;
+	int			start;
+	t_stack		*stacks;
+	t_instr		*cmds;
 
 	if (argc == 1)
 		exit(1);
-	stacks = create_stacks(argc - 1, argv);
+	start = 1;
+	print_flag = 0;
+	if ((argv[1][0] == '-' && argv[1][1] == 'r') && !argv[1][2])
+	{
+		print_flag = 1;
+		start++;
+	}
+	stacks = create_stacks(argc - start, argv, start);
 	cmds = read_input(stacks);
-	execute_cmds(stacks, cmds);
+	execute_cmds(stacks, cmds, print_flag);
 	free_stacks(stacks);
 	free_list(cmds);
 	return (0);
