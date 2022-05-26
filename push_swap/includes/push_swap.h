@@ -26,6 +26,9 @@ typedef struct s_stack
 	int	size_b;
 }		t_stack;
 
+int		find_position(int *stack, int size, int value);
+int		find_lowest(int *array, int size);
+int		find_highest(int *stack, int size);
 void	error_handler(t_stack *stacks);
 void	sort_stack(t_stack *stacks);
 void	push_a(t_stack *stacks);
@@ -39,6 +42,7 @@ void	rotate_a_and_b(t_stack *stacks);
 void	reverse_a(t_stack *stacks);
 void	reverse_b(t_stack *stacks);
 void	reverse_a_and_b(t_stack *stacks);
+void	rotate_to_pos(t_stack *stacks, int *target);
 t_stack	*create_stacks(int count, char **argv);
 
 #endif
