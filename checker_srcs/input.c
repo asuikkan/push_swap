@@ -71,6 +71,8 @@ static void	(*check_buffer(char *buf))(t_stack *stacks)
 		line[i] = '\0';
 		return (check_instruction(line));
 	}
+	while ((read(0, buf, 1) > 0))
+		continue ;
 	return (NULL);
 }
 
