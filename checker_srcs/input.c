@@ -72,7 +72,10 @@ static void	(*check_buffer(char *buf))(t_stack *stacks)
 		return (check_instruction(line));
 	}
 	while ((read(0, buf, 1) > 0))
-		continue ;
+	{
+		if (buf[0] == '\n')
+			break ;
+	}
 	return (NULL);
 }
 
