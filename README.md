@@ -38,7 +38,7 @@ The program **push_swap** takes numbers as command line arguments and prints a s
 
 ![push_swap_example.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_example.png)
 
-Visualization of sorting a hundred numbers by this program:
+Visualization of sorting a hundred numbers with this program:
 
 ![push_swap_visualization.gif](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_visualization.gif)
 
