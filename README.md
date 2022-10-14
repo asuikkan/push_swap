@@ -10,7 +10,7 @@ At the start, all numbers are in stack A in the order they are received, from to
 
 If the numbers given to the program are `3 2 1 0`, the starting position will be:
 
-![push_swap_stacks.png](https://www.dropbox.com/s/96btdea93na6gum/push_swap_stacks.png?dl=0)
+![push_swap_stacks.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_stacks.png)
 
 ### Operations
 
@@ -36,11 +36,11 @@ You are required to create two programs in this project: **push_swap** and **che
 
 The program **push_swap** takes numbers as command line arguments and prints a set of operations that sort the numbers to stack A leaving stack B empty. Duplicate numbers are not allowed. Example:
 
-![push_swap_example.png](https://www.dropbox.com/s/g00ydf5o6elhfyg/push_swap_example.png?dl=0)
+![push_swap_example.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_example.png)
 
 Visualization of sorting a hundred numbers by this program:
 
-![push_swap_visualization.gif](https://www.dropbox.com/s/8l7ieddr6ef8l34/push_swap_visualization.gif?dl=0)
+![push_swap_visualization.gif](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_visualization.gif)
 
 Left side is stack A and right side is stack B. Visualizer by https://github.com/o-reo/push_swap_visualizer
 
@@ -48,13 +48,13 @@ Left side is stack A and right side is stack B. Visualizer by https://github.com
 
 The program **checker** also takes numbers as command line arguments with no duplicates and starts reading operations from the standard input. Unknown operations cause an error. After the operations are read, it will perform these operations on the stacks and check if the numbers are sorted as stated by the rules. It will then print “OK” if the sorting is successful and “KO” if it is not.
 
-![Screen Shot 2022-10-14 at 3.30.03 PM.png](https://www.dropbox.com/s/z43a0qa8q6xuehz/Screen%20Shot%202022-10-14%20at%203.30.03%20PM.png?dl=0)
+![checker_ko.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/checker_ko.png)
 
-![Screen Shot 2022-10-14 at 3.31.22 PM.png](https://www.dropbox.com/s/dn17ojymwxvmyq8/Screen%20Shot%202022-10-14%20at%203.31.22%20PM.png?dl=0)
+![checker_ok.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/checker_ok.png)
 
 The intended way to use these programs is to pipe the output of **push_swap** to **checker**:
 
-![Screen Shot 2022-10-14 at 3.43.22 PM.png](https://www.dropbox.com/s/7bwji50lwrwt7yw/Screen%20Shot%202022-10-14%20at%203.43.22%20PM.png?dl=0)
+![push_swap_checker_pipe.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_checker_pipe.png)
 
 ## Performance
 
