@@ -10,7 +10,7 @@ At the start, all numbers are in stack A in the order they are received, from to
 
 If the numbers given to the program are `3 2 1 0`, the starting position will be:
 
-![push_swap_stacks.png](Push_swap%202a81570d9f6047a0bf038d86a2552eba/push_swap_stacks.png)
+![push_swap_stacks.png](https://www.dropbox.com/s/96btdea93na6gum/push_swap_stacks.png?dl=0)
 
 ### Operations
 
@@ -18,7 +18,7 @@ Only the following operations are allowed to sort the numbers:
 
 - **sa: swap A** - swap the first two numbers at the top of stack A. Do nothing if there are less than two numbers.
 - **sb: swap B** - swap the first two numbers at the top of stack B. Do nothing if there are less than two numbers.
-- **ss: swap both** - ****sa and sb at the same time.
+- **ss: swap both** - sa and sb at the same time.
 - **pa: push A** - take the first number at the top of B and put it at the top of A. Do nothing if B is empty.
 - **pb: push B** - take the first number at the top of A and put it at the top of B. Do nothing if A is empty.
 - **ra: rotate A** - shift up all numbers of stack A by one position. The top number becomes the bottom one.
@@ -36,11 +36,11 @@ You are required to create two programs in this project: **push_swap** and **che
 
 The program **push_swap** takes numbers as command line arguments and prints a set of operations that sort the numbers to stack A leaving stack B empty. Duplicate numbers are not allowed. Example:
 
-![push_swap_example.png](Push_swap%202a81570d9f6047a0bf038d86a2552eba/push_swap_example.png)
+![push_swap_example.png](https://www.dropbox.com/s/g00ydf5o6elhfyg/push_swap_example.png?dl=0)
 
 Visualization of sorting a hundred numbers by this program:
 
-![push_swap_visualization.gif](Push_swap%202a81570d9f6047a0bf038d86a2552eba/push_swap_visualization.gif)
+![push_swap_visualization.gif](https://www.dropbox.com/s/8l7ieddr6ef8l34/push_swap_visualization.gif?dl=0)
 
 Left side is stack A and right side is stack B. Visualizer by https://github.com/o-reo/push_swap_visualizer
 
@@ -48,13 +48,13 @@ Left side is stack A and right side is stack B. Visualizer by https://github.com
 
 The program **checker** also takes numbers as command line arguments with no duplicates and starts reading operations from the standard input. Unknown operations cause an error. After the operations are read, it will perform these operations on the stacks and check if the numbers are sorted as stated by the rules. It will then print “OK” if the sorting is successful and “KO” if it is not.
 
-![Screen Shot 2022-10-14 at 3.30.03 PM.png](Push_swap%202a81570d9f6047a0bf038d86a2552eba/Screen_Shot_2022-10-14_at_3.30.03_PM.png)
+![Screen Shot 2022-10-14 at 3.30.03 PM.png](https://www.dropbox.com/s/z43a0qa8q6xuehz/Screen%20Shot%202022-10-14%20at%203.30.03%20PM.png?dl=0)
 
-![Screen Shot 2022-10-14 at 3.31.22 PM.png](Push_swap%202a81570d9f6047a0bf038d86a2552eba/Screen_Shot_2022-10-14_at_3.31.22_PM.png)
+![Screen Shot 2022-10-14 at 3.31.22 PM.png](https://www.dropbox.com/s/dn17ojymwxvmyq8/Screen%20Shot%202022-10-14%20at%203.31.22%20PM.png?dl=0)
 
 The intended way to use these programs is to pipe the output of **push_swap** to **checker**:
 
-![Screen Shot 2022-10-14 at 3.43.22 PM.png](Push_swap%202a81570d9f6047a0bf038d86a2552eba/Screen_Shot_2022-10-14_at_3.43.22_PM.png)
+![Screen Shot 2022-10-14 at 3.43.22 PM.png](https://www.dropbox.com/s/7bwji50lwrwt7yw/Screen%20Shot%202022-10-14%20at%203.43.22%20PM.png?dl=0)
 
 ## Performance
 
