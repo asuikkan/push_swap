@@ -10,7 +10,7 @@ At the start, all numbers are in stack A in the order they are received, from to
 
 If the numbers given to the program are `3 2 1 0`, the starting position will be:
 
-![push_swap_stacks.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_stacks.png?raw=true)
+![push_swap_stacks.png](https://i.ibb.co/h7kyPZB/push-swap-stacks.png)
 
 ### Operations
 
