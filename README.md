@@ -40,7 +40,7 @@ The program **push_swap** takes numbers as command line arguments and prints a s
 
 Visualization of sorting a hundred numbers with this program:
 
-![push_swap_visualization.gif](https://i.ibb.co/zXdHMxG/push-swap-visualization.gif)
+![push_swap_visualization.gif]<img src ="https://i.ibb.co/zXdHMxG/push-swap-visualization.gif">
 
 Left side is stack A and right side is stack B. Visualizer by https://github.com/o-reo/push_swap_visualizer
 
