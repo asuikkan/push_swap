@@ -36,11 +36,11 @@ You are required to create two programs in this project: **push_swap** and **che
 
 The program **push_swap** takes numbers as command line arguments and prints a set of operations that sort the numbers to stack A leaving stack B empty. Duplicate numbers are not allowed. Example:
 
-![push_swap_example.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_example.png)
+![push_swap_example.png](https://i.ibb.co/gznBS3X/push-swap-example.png)
 
 Visualization of sorting a hundred numbers with this program:
 
-![push_swap_visualization.gif](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_visualization.gif)
+![push_swap_visualization.gif](https://i.ibb.co/zXdHMxG/push-swap-visualization.gif)
 
 Left side is stack A and right side is stack B. Visualizer by https://github.com/o-reo/push_swap_visualizer
 
@@ -48,13 +48,13 @@ Left side is stack A and right side is stack B. Visualizer by https://github.com
 
 The program **checker** also takes numbers as command line arguments with no duplicates and starts reading operations from the standard input. Unknown operations cause an error. After the operations are read, it will perform these operations on the stacks and check if the numbers are sorted as stated by the rules. It will then print “OK” if the sorting is successful and “KO” if it is not.
 
-![checker_ko.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/checker_ko.png)
+![checker_ko.png](https://i.ibb.co/r0KHr4B/checker-ko.png)
 
-![checker_ok.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/checker_ok.png)
+![checker_ok.png](https://i.ibb.co/d70YCxr/checker-ok.png)
 
 The intended way to use these programs is to pipe the output of **push_swap** to **checker**:
 
-![push_swap_checker_pipe.png](https://github.com/asuikkan/repository_images/blob/4751b272395ddf2522887bd960a163657a9785db/Push_swap_images/push_swap_checker_pipe.png)
+![push_swap_checker_pipe.png](https://i.ibb.co/Z2YwQSm/push-swap-checker-pipe.png)
 
 ## Performance
 
