@@ -40,6 +40,7 @@ The program **push_swap** takes numbers as command line arguments and prints a s
 
 
 Visualization of sorting a hundred numbers with this program:
+
 ![push-swap-visualization](https://user-images.githubusercontent.com/86047454/207065251-37cdcf57-fad0-4ae4-96ff-a6368b937d97.gif)
 
 Left side is stack A and right side is stack B. Visualizer by https://github.com/o-reo/push_swap_visualizer
@@ -48,13 +49,13 @@ Left side is stack A and right side is stack B. Visualizer by https://github.com
 
 The program **checker** also takes numbers as command line arguments with no duplicates and starts reading operations from the standard input. Unknown operations cause an error. After the operations are read, it will perform these operations on the stacks and check if the numbers are sorted as stated by the rules. It will then print “OK” if the sorting is successful and “KO” if it is not.
 
-![checker_ko.png](https://i.ibb.co/r0KHr4B/checker-ko.png)
+<img width="270" alt="checker-ko" src="https://user-images.githubusercontent.com/86047454/207067486-6dd0cb7e-3afe-4d94-9f71-2988ce2607e8.png">
 
-![checker_ok.png](https://i.ibb.co/d70YCxr/checker-ok.png)
+<img width="274" alt="checker-ok" src="https://user-images.githubusercontent.com/86047454/207067593-955381b2-890d-419f-9833-4c33355b2372.png">
 
 The intended way to use these programs is to pipe the output of **push_swap** to **checker**:
 
-![push_swap_checker_pipe.png](https://i.ibb.co/Z2YwQSm/push-swap-checker-pipe.png)
+<img width="478" alt="push-swap-checker-pipe" src="https://user-images.githubusercontent.com/86047454/207067661-8464b4b4-3e24-40c4-9570-a6c5b6eb1bff.png">
 
 ## Performance
 
