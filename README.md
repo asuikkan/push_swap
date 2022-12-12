@@ -10,7 +10,7 @@ At the start, all numbers are in stack A in the order they are received, from to
 
 If the numbers given to the program are `3 2 1 0`, the starting position will be:
 
-![push_swap_stacks.png](https://i.ibb.co/h7kyPZB/push-swap-stacks.png)
+![push-swap-stacks](https://user-images.githubusercontent.com/86047454/207067049-b0543e80-3d7a-456b-a9fb-6d46a09c6c14.png)
 
 ### Operations
 
@@ -36,7 +36,8 @@ You are required to create two programs in this project: **push_swap** and **che
 
 The program **push_swap** takes numbers as command line arguments and prints a set of operations that sort the numbers to stack A leaving stack B empty. Duplicate numbers are not allowed. Example:
 
-![push_swap_example.png](https://i.ibb.co/gznBS3X/push-swap-example.png)
+<img width="283" alt="push-swap-example" src="https://user-images.githubusercontent.com/86047454/207067122-b46c208d-9662-4b31-b78d-68e732698e6c.png">
+
 
 Visualization of sorting a hundred numbers with this program:
 ![push-swap-visualization](https://user-images.githubusercontent.com/86047454/207065251-37cdcf57-fad0-4ae4-96ff-a6368b937d97.gif)
